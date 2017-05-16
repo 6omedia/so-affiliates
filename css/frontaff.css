@@ -1,0 +1,42 @@
+
+/* aff page */
+
+.affproduct img {
+	max-width: 500px;
+	margin: 0px auto;
+	display: block;
+	margin-bottom: 20px;
+}
+
+.instagram_box {
+    background: #f5f5f5;
+    padding: 0px;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: solid 1px #e6e6e6;
+}
+
+.instagram_box img:first-child {
+	margin-left: 2%;
+}
+
+.instagram_box img {
+	width: 22.5%;
+	float: left;
+	margin: 2% 2% 2% 0px;
+}
+
+/* Where to buy */
+
+.where_to_buy_box {
+    margin-bottom: 20px;
+}
+
+.where_to_buy_table {
+	width: 100%;
+	text-align: center;
+}
+
+/*.instagram_box img:last-child {
+	margin-right: 0%;
+}*/
