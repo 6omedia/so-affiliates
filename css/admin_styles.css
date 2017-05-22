@@ -1,13 +1,22 @@
-/*h1, h2, p {
-	background: blue;
-}*/
+
+/* Product Page */
 
 .removeBtn {
 	cursor: pointer;
 }
 
-input:disabled {
+input[readonly] {
     border: none;
     color: #000;
     background: azure;
+}
+
+.procons {
+	overflow: hidden;
+	margin-top: 20px;
+}
+
+.proconBox {
+	width: 400px;
+	float: left;
 }

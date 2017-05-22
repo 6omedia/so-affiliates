@@ -1,47 +1,24 @@
+<?php get_header(); ?> 
+
+
 <?php 
-
-	
-
-	// function createMerchants(){
-
-	// 	$merchantArray = [];
-
-	// 	global $post;
-			
-	// 	$custom = get_post_custom($post->ID);
-	// 	$merchants = unserialize($custom['merchants'][0]);
-	// 	$merchantids = unserialize($custom['merchantids'][0]);
-	// 	$links = unserialize($custom['links'][0]);
-	// 	$prices = unserialize($custom['prices'][0]);
-
-	// 	for($i=0; $i<sizeof($merchants); $i++){
-
-	// 		$merchant = array(
-	// 			'name' => $merchants[$i],
-	// 			'id' => $merchantids[$i],
-	// 			'link' => $links[$i],
-	// 			'price' => $prices[$i]
-	// 		);
-
-	// 		$merchantArray[] = $merchant;
-
-	// 	}
-
-	// 	return $merchantArray;
-
-	// }
-
-	get_header(); 
 
 	require( plugin_dir_path(__FILE__) . '../so-productdata.php');
 
 	$productData = new ProductData(get_post_custom($post->ID));
 	$instagramUrls = $productData->getInstagramPictures();
 	$merchants = $productData->getMerchants();
+	$review = $productData->getReviews();
+
+	$userId = '';
+
+	if(is_user_logged_in()){
+		$userId = get_current_user_id();
+	}
 
 ?>
 
-	<section>
+	<section class="aff_product_page">
 		<div class="container">
 
 			<?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
@@ -67,7 +44,7 @@
 					</div>
 					<div class="col-sm-5">
 						<div class="where_to_buy_box pinkbox">
-							<h2>Where to Buy</h2>
+							<h2>Where to Buy <span data-post_id="<?php echo $post->ID; ?>" data-user_id="<?php echo $userId; ?>" class="ws_heart"></span></h2>
 							<!-- merchant links -->
 							<table class="where_to_buy_table">
 							<?php foreach ($merchants as $merchant) { ?>
@@ -86,8 +63,27 @@
 							</table>
 						</div>
 						<!-- reviews -->
-						<div class="product_reviews pinkbox">
-							<h2>Reviews</h2>
+						<div class="product_review pinkbox">
+							<h2>Review</h2>
+							<div>
+								<ul class="rating list rating-<?php echo $review['rating']; ?>">
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+									<li></li>
+								</ul>
+							</div>
+							<ul class="list procon pros">
+								<?php foreach ($review['pros'] as $pro) { ?>
+										<li><?php echo $pro; ?></li>
+								<?php } ?>
+							</ul>
+							<ul class="list procon cons">
+								<?php foreach ($review['cons'] as $con) { ?>
+										<li><?php echo $con; ?></li>
+								<?php } ?>
+							</ul>
 						</div>
 						<!-- similar -->
 						<div class="similar_products pinkbox">

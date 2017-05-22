@@ -16,6 +16,18 @@ class helpful_funcs {
 		}
 
 	}
+
+	function get_aff_taxonomies(){
+
+		$taxes = get_taxonomies(); 
+		
+		unset($taxes['nav_menu']);
+		unset($taxes['link_category']);
+		unset($taxes['post_format']);
+
+		return $taxes;
+
+	}
 	
 }
 

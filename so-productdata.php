@@ -4,7 +4,11 @@ class ProductData {
 	
 	private $merchants = [];
 	private $instagramPictures = ['', '', '', ''];
-	private $reviews = [];
+	private $reviews = array(
+				'rating' => '5',
+				'pros' => array(),
+				'cons' => array()
+			);
 	
 	function getMerchants(){
 		return $this->merchants;
@@ -52,10 +56,25 @@ class ProductData {
 
 	}
 
+	function loadReviews($customData){
+
+		global $post;
+			
+		$rating = $customData['rating'][0];
+		$pros = unserialize($customData['pro'][0]);
+		$cons = unserialize($customData['con'][0]);
+
+		$this->reviews['rating'] = $rating;
+		$this->reviews['pros'] = $pros;
+		$this->reviews['cons'] = $cons;
+
+	}
+
 	function __construct($customData){
 
 		$this->loadInstagramPictures($customData);
 		$this->loadMerchants($customData);
+		$this->loadReviews($customData);
 
 	}
 

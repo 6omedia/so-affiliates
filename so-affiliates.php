@@ -35,21 +35,11 @@ class SoAffilates {
 			$plugin_url . '/img/icon.png'
 		);
 
-		// Add Merchant Page
-		add_submenu_page(
-			'soaffilate',
-			'Merchants',
-			'Merchants',
-			'manage_options',
-			'merchants',
-			array($this, 'soaffilates_merchants_page')
-		);
-
 	}
 
 	function soaffilates_option_page(){
 
-		if( !current_user_can('manage_options')){
+		if( !current_user_can('manage_options') ){
 			wp_die('You do not have permission to access this page');
 		}
 
@@ -61,43 +51,17 @@ class SoAffilates {
 
 	}
 
-	function soaffilates_merchants_page(){
-
-		if( !current_user_can('manage_options')){
-			wp_die('You do not have permission to access this page');
-		}
-
-		global $plugin_url;
-		global $options;
-		global $helpFuncs;
-
-		require('inc/merchants.php');
-
-	}
-
-	// function createDbTables(){
-
-	// 	global $wpdb;
-	// 	$charset_collate = $wpdb->get_charset_collate();
-
-	// 	$table_name = $wpdb->prefix . 'so_merchants';
-
-	// 	$sql = "CREATE TABLE $table_name (
-	// 		id mediumint(9) NOT NULL AUTO_INCREMENT,
-	// 		name varchar(60) DEFAULT '' NOT NULL,
-	// 		img varchar(60) DEFAULT '' NOT NULL,
-	// 		UNIQUE KEY id (id)
-	// 	) $charset_collate;";
-
-	// 	require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-	// 	dbDelta( $sql );
-
-	// }
-
 	function soaff_load_admin_assets(){
 		wp_enqueue_style('soff_styles', plugins_url( 'so-affiliates/css/admin_styles.css' ));
 		wp_enqueue_script('soff_main_js', plugins_url( 'so-affiliates/js/main.js' ), array('jquery'));
-		wp_enqueue_script('soff_merchant_js', plugins_url( 'so-affiliates/js/merchants.js' ), array('soff_main_js'));
+		wp_enqueue_script('soff_product_js', plugins_url( 'so-affiliates/js/product.js' ), array('soff_main_js'));
+
+		if(isset($_GET['page'])){
+			if($_GET['page'] == 'soaffilate'){
+				wp_enqueue_script('soff_options_js', plugins_url( 'so-affiliates/js/options.js' ), array('soff_main_js'));
+			}
+		}
+
 	}
 
 	function soaff_load_front_assets(){
@@ -115,9 +79,6 @@ class SoAffilates {
 	}
 
 	function __construct() {
-		
-		// Setup Merchant Table in DB
-		// register_activation_hook( __FILE__, array($this, 'createDbTables') );
 		
 		// Add Menu
 		add_action( 'admin_menu', array( $this, 'so_aff_menu' ) );
