@@ -3,9 +3,12 @@
 
 <?php 
 
+	require( plugin_dir_path(__FILE__) . '../so-shopfront.php');
 	require( plugin_dir_path(__FILE__) . '../so-productdata.php');
 
-	$productData = new ProductData(get_post_custom($post->ID));
+	$theShop = new ShopFront();
+
+	$productData = new ProductData($post->ID);
 	$instagramUrls = $productData->getInstagramPictures();
 	$merchants = $productData->getMerchants();
 	$review = $productData->getReviews();
@@ -31,10 +34,13 @@
 
 							<!-- instagram -->
 							<div class="instagram_box">
-								<img src="<?php echo $instagramUrls[0]; ?>">
-								<img src="<?php echo $instagramUrls[1]; ?>">
-								<img src="<?php echo $instagramUrls[2]; ?>">
-								<img src="<?php echo $instagramUrls[3]; ?>">
+								<?php foreach ($instagramUrls as $img) { ?>
+									
+									<a href="<?php echo $img['pageUrl']; ?>">
+										<img src="<?php echo $img['imgSrc']; ?>">
+									</a>	
+									
+								<?php } ?>
 							</div>
 
 							<!-- description -->
@@ -75,19 +81,36 @@
 								</ul>
 							</div>
 							<ul class="list procon pros">
-								<?php foreach ($review['pros'] as $pro) { ?>
-										<li><?php echo $pro; ?></li>
-								<?php } ?>
+								<?php 
+									if(is_array($review['pros'])){
+
+										foreach ($review['pros'] as $pro) {
+											echo '<li>' . $pro . '</li>';
+									    } 
+
+									}
+								?>
 							</ul>
 							<ul class="list procon cons">
-								<?php foreach ($review['cons'] as $con) { ?>
-										<li><?php echo $con; ?></li>
-								<?php } ?>
+								<?php 
+									if(is_array($review['cons'])){
+
+										foreach ($review['cons'] as $con) {
+											echo '<li>' . $con . '</li>';
+									    } 
+
+									}
+								?>
 							</ul>
 						</div>
 						<!-- similar -->
 						<div class="similar_products pinkbox">
 							<h2>Similar Products</h2>
+							<?php
+
+								$productData->outputSimilarProducts($post->ID, $theShop->getShopTaxonomy());
+
+							?>
 						</div>
 					</div>
 				</div>

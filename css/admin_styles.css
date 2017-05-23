@@ -20,3 +20,12 @@ input[readonly] {
 	width: 400px;
 	float: left;
 }
+
+.instagram_list {
+	overflow: hidden;
+}
+
+.instagram_list li {
+	float: left;
+	margin-right: 10px;
+}

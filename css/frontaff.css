@@ -16,14 +16,18 @@
     border: solid 1px #e6e6e6;
 }
 
-.instagram_box img:first-child {
+.instagram_box a:first-child {
 	margin-left: 2%;
 }
 
-.instagram_box img {
+.instagram_box a {
 	width: 22.5%;
 	float: left;
 	margin: 2% 2% 2% 0px;
+}
+
+.instagram_box img {
+    margin-bottom: 0px;
 }
 
 /* Where to buy */

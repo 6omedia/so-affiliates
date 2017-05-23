@@ -73,21 +73,46 @@
  			$custom = get_post_custom($post->ID);
 
   			$instagram_url_1 = $custom["instagram_url_1"][0];
+  			$instagram_page_1 = $custom["instagram_page_1"][0];
+
   			$instagram_url_2 = $custom["instagram_url_2"][0];
+  			$instagram_page_2 = $custom["instagram_page_2"][0];
+
   			$instagram_url_3 = $custom["instagram_url_3"][0];
+  			$instagram_page_3 = $custom["instagram_page_3"][0];
+
   			$instagram_url_4 = $custom["instagram_url_4"][0];
-  			
+  			$instagram_page_4 = $custom["instagram_page_4"][0];
+
   			?>
 
-  			<label>Instagram URL One:</label>
-			<input name="instagram_url_1" value="<?php echo $instagram_url_1; ?>" />
-			<label>Instagram URL Two:</label>
-			<input name="instagram_url_2" value="<?php echo $instagram_url_2; ?>" />
-			<label>Instagram URL Three:</label>
-			<input name="instagram_url_3" value="<?php echo $instagram_url_3; ?>" />
-			<label>Instagram URL Four:</label>
-			<input name="instagram_url_4" value="<?php echo $instagram_url_4; ?>" />
-			
+  			<ul class="instagram_list">
+  				<li>
+  					<label>Image URL One:</label><br>
+					<input name="instagram_url_1" value="<?php echo $instagram_url_1; ?>" /><br>
+					<label>Page URL One:</label><br>
+					<input name="instagram_page_1" value="<?php echo $instagram_page_1; ?>" />	
+  				</li>
+  				<li>
+  					<label>Image URL Two:</label><br>
+					<input name="instagram_url_2" value="<?php echo $instagram_url_2; ?>" /><br>
+					<label>Page URL One:</label><br>
+					<input name="instagram_page_2" value="<?php echo $instagram_page_2; ?>" />
+  				</li>
+  				<li>
+  					<label>Image URL Three:</label><br>
+					<input name="instagram_url_3" value="<?php echo $instagram_url_3; ?>" /><br>
+					<label>Page URL One:</label><br>
+					<input name="instagram_page_3" value="<?php echo $instagram_page_3; ?>" />
+  				</li>
+  				<li>
+  					<label>Image URL Four:</label><br>
+					<input name="instagram_url_4" value="<?php echo $instagram_url_4; ?>" /><br>
+					<label>Page URL One:</label><br>
+					<input name="instagram_page_4" value="<?php echo $instagram_page_4; ?>" />
+  				</li>
+			</ul>
+
 			<?php
 
 		}
@@ -129,6 +154,7 @@
   			<!-- Maybe change these to use name[] instead -->
 			
 			<table id="merchantTable">
+
 				<tr>
 					<th>Merchant</th>
 					<th>Link</th>
@@ -169,7 +195,7 @@
 
 				<?php
 
-				 foreach ($merchantArray as $merchant) { ?>
+				foreach ($merchantArray as $merchant) { ?>
 						
 					<tr>
 						<td>
@@ -254,9 +280,16 @@
  
  			// Instagram
 			update_post_meta($post->ID, "instagram_url_1", $_POST["instagram_url_1"]);
+			update_post_meta($post->ID, "instagram_page_1", $_POST["instagram_page_1"]);
+
 			update_post_meta($post->ID, "instagram_url_2", $_POST["instagram_url_2"]);
+			update_post_meta($post->ID, "instagram_page_2", $_POST["instagram_page_2"]);
+
 			update_post_meta($post->ID, "instagram_url_3", $_POST["instagram_url_3"]);
+			update_post_meta($post->ID, "instagram_page_3", $_POST["instagram_page_3"]);
+
 			update_post_meta($post->ID, "instagram_url_4", $_POST["instagram_url_4"]);
+			update_post_meta($post->ID, "instagram_page_4", $_POST["instagram_page_4"]);
 
 			// Merchants
 			update_post_meta($post->ID, "merchants", $_POST["merchants"]);

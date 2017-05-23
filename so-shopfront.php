@@ -94,6 +94,31 @@
 
 		}
 
+		// function getSimilarProducts($productId){
+
+		// 	$terms = get_the_terms($productId, $this->shop_taxonomy);
+		// 	$termArray = [];
+
+		// 	foreach($terms as $term){
+		// 		$termArray[] = $term->slug;
+		// 	}
+
+		// 	$args = array(
+		// 		'post_type' => 'affproducts',
+		// 		'tax_query' => array(
+		//             array(
+		//                 'taxonomy' => $this->shop_taxonomy,
+		//                 'field' => 'slug',
+		//                 'terms' => $termArray,
+		//             )
+		//         ),
+		// 		'posts_per_page' => 6
+		// 	);
+
+		// 	return new WP_Query( $args );
+
+		// }
+
 		function __construct(){
 			
 			$options = get_option('soaffiliates');
