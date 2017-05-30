@@ -31,38 +31,6 @@ class ProductData {
 			);
 		}
 
-		// $img1 = array(
-		// 	'imgSrc' => $customData['instagram_url_1'][0],
-		// 	'pageUrl' => $customData['instagram_page_1'][0]
-		// );
-
-		// $img1 = array(
-		// 	'imgSrc' => $customData['instagram_url_1'][0],
-		// 	'pageUrl' => $customData['instagram_page_1'][0]
-		// );
-
-		// $img1 = array(
-		// 	'imgSrc' => $customData['instagram_url_1'][0],
-		// 	'pageUrl' => $customData['instagram_page_1'][0]
-		// );
-
-		// $img1 = array(
-		// 	'imgSrc' => $customData['instagram_url_1'][0],
-		// 	'pageUrl' => $customData['instagram_page_1'][0]
-		// );
-
-		// $this->instagramPictures[0] = $customData['instagram_url_1'][0];
-		// $this->instagramPictures[1] = $customData['instagram_page_1'][0];
-
-		// $this->instagramPictures[2] = $customData['instagram_url_2'][0];
-		// $this->instagramPictures[3] = $customData['instagram_page_2'][0];
-
-		// $this->instagramPictures[4] = $customData['instagram_url_3'][0];
-		// $this->instagramPictures[5] = $customData['instagram_page_3'][0];
-
-		// $this->instagramPictures[6] = $customData['instagram_url_4'][0];
-		// $this->instagramPictures[7] = $customData['instagram_page_4'][0];
-
 	}
 
 	function loadMerchants($customData){
@@ -87,6 +55,10 @@ class ProductData {
 			$this->merchants[] = $merchant;
 
 		}
+
+		usort($this->merchants, function($a, $b){
+			return $a['price'] - $b['price'];
+		});
 
 	}
 

@@ -30,13 +30,16 @@
 					<div class="col-sm-7">
 						<div class="affproduct">
 							<h1><?php the_title(); ?></h1>
+
+							<?php $theShop->outPutBreadCrumbs('product', get_the_title()); ?>
+
 							<?php the_post_thumbnail(); ?>
 
 							<!-- instagram -->
 							<div class="instagram_box">
 								<?php foreach ($instagramUrls as $img) { ?>
 									
-									<a href="<?php echo $img['pageUrl']; ?>">
+									<a target="_blank" href="<?php echo $img['pageUrl']; ?>">
 										<img src="<?php echo $img['imgSrc']; ?>">
 									</a>	
 									
@@ -50,7 +53,17 @@
 					</div>
 					<div class="col-sm-5">
 						<div class="where_to_buy_box pinkbox">
-							<h2>Where to Buy <span data-post_id="<?php echo $post->ID; ?>" data-user_id="<?php echo $userId; ?>" class="ws_heart"></span></h2>
+
+						<?php
+
+							$wsClasses = 'ws_heart';
+							if(function_exists('wishListClasses')){
+								$wsClasses = wishListClasses($post->ID);
+							}
+
+						?>
+
+							<h2>Where to Buy <span data-post_id="<?php echo $post->ID; ?>" data-user_id="<?php echo $userId; ?>" class="<?php echo $wsClasses; ?>"></span></h2>
 							<!-- merchant links -->
 							<table class="where_to_buy_table">
 							<?php foreach ($merchants as $merchant) { ?>
@@ -62,7 +75,7 @@
 										<span>£<?php echo $merchant['price']; ?></span>
 									</td>
 									<td>
-										<a class="buy_button" href="<?php echo $merchant['link']; ?>">Buy Now</a>
+										<a target="_blank" class="buy_button" href="<?php echo $merchant['link']; ?>">Buy Now</a>
 									</td>
 								</tr>
 							<?php } ?>

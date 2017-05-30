@@ -91,7 +91,7 @@
   					<label>Image URL One:</label><br>
 					<input name="instagram_url_1" value="<?php echo $instagram_url_1; ?>" /><br>
 					<label>Page URL One:</label><br>
-					<input name="instagram_page_1" value="<?php echo $instagram_page_1; ?>" />	
+					<input name="instagram_page_1" value="<?php echo $instagram_page_1; ?>" />
   				</li>
   				<li>
   					<label>Image URL Two:</label><br>
