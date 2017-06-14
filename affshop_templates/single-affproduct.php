@@ -30,6 +30,7 @@
 					<div class="col-sm-7">
 						<div class="affproduct">
 							<h1><?php the_title(); ?></h1>
+							<p class="product_brand"><?php echo $productData->getBrand(); ?></p>
 
 							<?php $theShop->outPutBreadCrumbs('product', get_the_title()); ?>
 

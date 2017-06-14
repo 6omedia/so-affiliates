@@ -7,8 +7,16 @@
 	$shopFront = new ShopFront();
 	$bcPage = 'shop';
 	
-	if(isset($_GET['product_cat'])){
+	if(isset($_GET['product_kind'])){
 		$bcPage = 'category';
+	}
+
+	$options = get_option('soaffiliates');
+	$productTaxes = $options['aff_product_taxonomies'];
+	$useBrand = false;
+
+	if(in_array('brands', $productTaxes)){
+		$useBrand = true;
 	}
 
 ?>
@@ -24,15 +32,21 @@
 				<p class="visible-xs" id="shopByCats">By Category</p>
 				<div class="sidebar shop_all_sidebar">
 					<div class="x shop-x visible-xs">x</div>
-					<?php $shopFront->outputShopCats(); ?>
+					<?php 
+
+						echo $shopFront->aff_shop_cats();
+						// $shopFront->outputShopCats();  aff_shop_cats
+
+					?>
 				</div>
 			</div>
 			<div class="col-sm-9">
 
 				<?php // $products = $shopFront->getProducts();
 
-					if(isset($_GET['product_cat'])){
-				  		$cat = $_GET['product_cat'];
+					if(isset($_GET['product_kind'])){
+
+				  		$cat = $_GET['product_kind'];
 						query_posts(array(
 							'post_type' => 'affproducts',
 							'tax_query' => array(
@@ -54,9 +68,32 @@
 					<?php if(have_posts() ) : while (have_posts() ) : the_post(); ?>
 
 						<div class="col-sm-4 col-md-3">
-							<div class="product">
+							<div class="product shop_product">
 								<a href="<?php the_permalink(); ?>">
-									<?php the_post_thumbnail(); ?>
+									<?php
+										
+										global $plugin_url;
+
+										if(has_post_thumbnail()){
+										 	the_post_thumbnail(); 
+										}else{
+											echo '<img src="' . $plugin_url . '/img/picture.png" alt="' . get_the_title() . '" />';
+									 	}
+
+									 	$brand = '';
+
+										if($useBrand){
+
+											$terms = get_the_terms($productId, 'brands');
+
+											if(!empty($terms)){
+												$brand = $terms[0]->name;
+											}
+
+										}
+
+								 	?>
+								 	<span class="product_brand"><?php echo $brand; ?></span>
 									<p><?php the_title(); ?></p>
 								</a>
 							</div>

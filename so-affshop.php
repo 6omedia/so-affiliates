@@ -15,14 +15,18 @@
 			$supports = array('title', 'editor', 'thumbnail');
 
 			$options = get_option('soaffiliates');
-			$productTaxes = $options['aff_product_taxonomies'];
+			$productTaxes = ['category'];
+
+			if( !empty($options['aff_product_taxonomies']) ){
+				$productTaxes = $options['aff_product_taxonomies'];
+			}
 
 			$args = array(
 					'labels' => $labels,
 					'supports' => $supports,
 					'public' => true,
 					'has_archive' => true,
-					'taxonomies'          => $productTaxes,
+					'taxonomies' => $productTaxes,
 					//'show_ui' => false,
 					'rewrite' => array('slug' => 'shop'),
 					'menu_icon' => 'dashicons-cart'
@@ -70,19 +74,40 @@
 		function instagram_url_box(){
 
 			global $post;
+
+			if( !is_object($post) ) 
+        		return;
+
  			$custom = get_post_custom($post->ID);
 
-  			$instagram_url_1 = $custom["instagram_url_1"][0];
-  			$instagram_page_1 = $custom["instagram_page_1"][0];
+ 			$instagram_url_1 = '';
+			$instagram_page_1 = '';
+			$instagram_url_2 = '';
+			$instagram_page_2 = '';
+			$instagram_url_3 = '';
+  			$instagram_page_3 = '';
+  			$instagram_url_4 = '';
+  			$instagram_page_4 = '';
 
-  			$instagram_url_2 = $custom["instagram_url_2"][0];
-  			$instagram_page_2 = $custom["instagram_page_2"][0];
+ 			if(isset($custom["instagram_url_1"])){
+ 				$instagram_url_1 = $custom["instagram_url_1"][0];
+  				$instagram_page_1 = $custom["instagram_page_1"][0];
+ 			}
 
-  			$instagram_url_3 = $custom["instagram_url_3"][0];
-  			$instagram_page_3 = $custom["instagram_page_3"][0];
+ 			if(isset($custom["instagram_url_2"])){
+	  			$instagram_url_2 = $custom["instagram_url_2"][0];
+	  			$instagram_page_2 = $custom["instagram_page_2"][0];
+	  		}
 
-  			$instagram_url_4 = $custom["instagram_url_4"][0];
-  			$instagram_page_4 = $custom["instagram_page_4"][0];
+  			if(isset($custom["instagram_url_3"])){
+	  			$instagram_url_3 = $custom["instagram_url_3"][0];
+	  			$instagram_page_3 = $custom["instagram_page_3"][0];
+	  		}
+
+  			if(isset($custom["instagram_url_4"])){
+	  			$instagram_url_4 = $custom["instagram_url_4"][0];
+	  			$instagram_page_4 = $custom["instagram_page_4"][0];
+	  		}
 
   			?>
 
@@ -123,12 +148,21 @@
 
 			global $post;
  			
+			if( !is_object($post) ) 
+        		return;
+
 			$custom = get_post_custom($post->ID);
 
-			$merchants = unserialize($custom['merchants'][0]);
-			$merchantids = unserialize($custom['merchantids'][0]);
-			$links = unserialize($custom['links'][0]);
-			$prices = unserialize($custom['prices'][0]);
+			$merchants = [];
+
+			if(isset($custom['merchants'][0])){
+
+				$merchants = unserialize($custom['merchants'][0]);
+				$merchantids = unserialize($custom['merchantids'][0]);
+				$links = unserialize($custom['links'][0]);
+				$prices = unserialize($custom['prices'][0]);
+
+			}
 
 			$merchSize = '';
 
@@ -278,6 +312,9 @@
 
 			global $post;
  
+			if( !is_object($post) ) 
+        		return;
+
  			// Instagram
 			update_post_meta($post->ID, "instagram_url_1", $_POST["instagram_url_1"]);
 			update_post_meta($post->ID, "instagram_page_1", $_POST["instagram_page_1"]);
@@ -310,8 +347,16 @@
 
 		    /* Checks for single template by post type */
 		    if ($post->post_type == "affproducts"){
-		    	return dirname( __FILE__ ) . '/templates/single-affproduct.php';
+
+		    	$located = locate_template( 'affshop_templates/single-affproducts.php' );
+
+		     	if ( !empty( $located ) ) {
+		     		return $located;
+		     	}
+
+		    	return dirname( __FILE__ ) . '/affshop_templates/single-affproduct.php';
 		    }
+		    
 		    return $single;
 
 		}
@@ -320,19 +365,24 @@
 
 			global $post;
 
+			$themeRoot = get_bloginfo('template_directory');
+
 		    if ( is_post_type_archive ( 'affproducts' ) ) {
-		         $archive_template = dirname( __FILE__ ) . '/templates/archive-affproducts.php';
-		         return $archive_template;
+
+		    	$located = locate_template( 'affshop_templates/archive-affproducts.php' );
+
+		     	if ( !empty( $located ) ) {
+		     		return $located;
+		     	}
+
+		     	$archive_template = dirname( __FILE__ ) . '/affshop_templates/archive-affproducts.php';
+		        return $archive_template;
+
 		    }
-		    
+
 		    return $template;
 
 		}
-
-		// function add_shop_admin_menu_item() {
-		//   // $page_title, $menu_title, $capability, $menu_slug, $callback_function
-		//   add_menu_page('Shop', 'Shop', 'shop', 'edit.php?post_status=draft&post_type=post');
-		// }
 
 		function __construct(){
 

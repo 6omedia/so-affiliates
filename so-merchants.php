@@ -38,7 +38,10 @@
 			global $post;
  			$custom = get_post_custom($post->ID);
 
-  			$network = $custom["network"][0]; ?>
+ 			$network = '';
+
+ 			if(isset($custom["network"][0]))
+  				$network = $custom["network"][0]; ?>
 
   			<label>Network:</label>
 			<input name="network" value="<?php echo $network; ?>" />
@@ -50,6 +53,10 @@
 		function save_merchant_meta(){
 
 			global $post;
+
+			if( !is_object($post) ) 
+        		return;
+
 			update_post_meta($post->ID, "network", $_POST["network"]);
 
 		}

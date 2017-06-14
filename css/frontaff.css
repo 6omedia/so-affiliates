@@ -41,6 +41,10 @@
 	text-align: center;
 }
 
+.where_to_buy_table img {
+    width: 100px;
+}
+
 /* Review */
 
 .product_review {
@@ -48,7 +52,7 @@
 }
 
 .product_review .rating {
-    /*background: #ffcf43;*/
+    padding-left: 0px;
     display: inline-block;
     height: 20px;
 }
@@ -82,7 +86,9 @@
 .product_review .procon {
 	width: 50%;
 	float: left;
-	margin-bottom: 0px;
+	margin: 0px;
+    padding-left: 0px;
+    list-style: none;
 }
 
 .product_review .procon li {
@@ -106,9 +112,78 @@
     background-size: 15px;
 }
 
-/*.instagram_box img:last-child {
-	margin-right: 0%;
+/* Shop */
+
+.aff_shop_cats,
+.aff_shop_cats ul {
+    list-style: none;
+    padding-left: 0px;
+    margin-left: 0px;
+}
+
+/*.aff_shop_cats li,
+.aff_shop_cats ul li {
+    position: relative;
 }*/
 
+.aff_shop_cats a {
+    display: block;
+    padding: 5px 10px;
+    border-bottom: solid 1px #ccc;
+}
 
+.aff_shop_cats a:hover {
+    background: #e8e8e8;
+}
 
+.aff_dropdown {
+    position: relative;
+}
+
+.add_ddtri:after {
+    content: "▼";
+    font-size: 12px;
+    vertical-align: middle;
+    margin-top: 3px;
+    position: absolute;
+    right: 5px;
+    display: inline-block;
+    width: 20px;
+    text-align: center;
+}
+
+.aff_shop_cats .children {
+    display: none;
+}
+
+.dd_open:after {
+    content: "▲";
+}
+
+.dd_active {
+    background: #e8e8e8;
+}
+
+.children {
+    background: #f3f3f3;
+}
+
+.children .children {
+    background: #f7f7f7;
+}
+
+.children .dd_active {
+    background: #efefef;
+}
+
+/* Bread Crumbs */
+
+.breadCrumbs {
+    background: #f5f5f5;
+    padding: 5px 15px;
+    list-style: none;
+}
+
+.breadCrumbs li {
+    display: inline-block;
+}

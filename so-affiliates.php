@@ -4,7 +4,7 @@
  * Plugin Name: SixOm Affiliates
  * Plugin URI: http://6omedia.co.uk
  * Description: Manage affilate products with multiple merchants
- * Version: 1.0
+ * Version: 2.0.0
  * Author: 6oMedia
  * Author URI:
  * License: GPL2
@@ -52,6 +52,7 @@ class SoAffilates {
 	}
 
 	function soaff_load_admin_assets(){
+		
 		wp_enqueue_style('soff_styles', plugins_url( 'so-affiliates/css/admin_styles.css' ));
 		wp_enqueue_script('soff_main_js', plugins_url( 'so-affiliates/js/main.js' ), array('jquery'));
 		wp_enqueue_script('soff_product_js', plugins_url( 'so-affiliates/js/product.js' ), array('soff_main_js'));
@@ -65,7 +66,10 @@ class SoAffilates {
 	}
 
 	function soaff_load_front_assets(){
+
 		wp_enqueue_style('soff_front_styles', plugins_url( 'so-affiliates/css/frontaff.css' ));
+		wp_enqueue_script('shop_js', plugins_url( 'so-affiliates/js/shop.js' ), array('jquery'));
+	
 	}
 
 	function setup_aff_shop(){

@@ -9,6 +9,7 @@ class ProductData {
 				'pros' => array(),
 				'cons' => array()
 			);
+	private $brand = '';
 
 	function getMerchants(){
 		return $this->merchants;
@@ -20,6 +21,10 @@ class ProductData {
 
 	function getReviews(){
 		return $this->reviews;
+	}
+
+	function getBrand(){
+		return $this->brand;
 	}
 
 	function loadInstagramPictures($customData){
@@ -73,6 +78,23 @@ class ProductData {
 		$this->reviews['rating'] = $rating;
 		$this->reviews['pros'] = $pros;
 		$this->reviews['cons'] = $cons;
+
+	}
+
+	function loadBrand($productId){
+
+		$options = get_option('soaffiliates');
+		$productTaxes = $options['aff_product_taxonomies'];
+
+		if(in_array('brands', $productTaxes)){
+
+			$terms = get_the_terms($productId, 'brands');
+
+			if(!empty($terms)){
+				$this->brand = $terms[0]->name;
+			}
+
+		}
 
 	}
 
@@ -134,6 +156,7 @@ class ProductData {
 		$this->loadInstagramPictures($customData);
 		$this->loadMerchants($customData);
 		$this->loadReviews($customData);
+		$this->loadBrand($productId);
 
 	}
 

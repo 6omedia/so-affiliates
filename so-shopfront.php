@@ -5,10 +5,6 @@
 		private $shopname = '';
 		private $shop_taxonomy = 'category';
 
-		private function outPutLi($level, $slug, $cat, $hasChildren){
-			return '<li class="cat_level_' . $level . ' ' . $hasChildren . '"><a href="' . home_url() . '/shop/?product_cat=' . $slug . '">' . $cat . '</li>';
-		}
-
 		private function getShopCategories(){
 
 			$productCats = get_terms(array(
@@ -24,53 +20,7 @@
 			return $this->shop_taxonomy;
 		}
 
-		function hasChildren($cats, $catId){
-
-			foreach ($cats as $cat) {
-				if($cat->parent == $catId){
-					return 'hasChildren';
-				}
-			}
-
-			return '';
-
-		}
-
-		function outputShopCats(){
-
-			$cats = $this->getShopCategories();
-			
-			echo '<ul class="list shop_categories">';
-
-			foreach ($cats as $cat) {
-				if($cat->parent == 0){
-					echo $this->outPutLi('0', $cat->slug, $cat->name, '');
-					echo '<ul class="ul_level_1">';
-					foreach ($cats as $subCat) {
-						if($subCat->parent == $cat->term_id){
-							echo $this->outPutLi('1', $subCat->slug, $subCat->name, $this->hasChildren($cats, $subCat->term_id));
-							echo '<ul class="ul_level_2">';
-							foreach ($cats as $subSubCat) {
-								if($subSubCat->parent == $subCat->term_id){
-									echo $this->outPutLi('2', $subSubCat->slug, $subSubCat->name, $this->hasChildren($cats, $subSubCat->term_id));
-								}
-							}
-							echo '</ul>';
-						}
-					}		
-					echo '</ul>';
-				}
-			}
-
-			echo '</ul>';
-
-		}
-
 		function findParents(&$parents, $cat){
-
-			// echo '<pre>findParents';
-			// print_r($parents);
-			// echo '</pre>';
 
 			$catObj = get_term_by('id', $cat, $this->shop_taxonomy);
 
@@ -100,7 +50,7 @@
 
 			if($page == 'category'){
 
-				$cat = $_GET['product_cat'];
+				$cat = $_GET['product_kind'];
 
 				$parents = [];
 
@@ -117,7 +67,7 @@
 			
 				foreach ($parents as $parent) {
 					$linkArray[] = array(
-						'link' => home_url() . '/shop/?product_cat=' . $parent->slug,
+						'link' => home_url() . '/shop/?product_kind=' . $parent->slug,
 						'text' => str_replace('-', ' ', $parent->slug)
 					);
 				}
@@ -145,7 +95,7 @@
 			
 				foreach ($parents as $parent) {
 					$linkArray[] = array(
-						'link' => home_url() . '/shop/?product_cat=' . $parent->slug,
+						'link' => home_url() . '/shop/?product_kind=' . $parent->slug,
 						'text' => str_replace('-', ' ', $parent->slug)
 					);
 				}
@@ -184,49 +134,6 @@
 
 		}
 
-		// function getProducts(){
-
-		// 	$args = array(
-		// 		'post_type' => 'affproducts',
-		// 		'posts_per_page' => 10,
-		// 		'paged' => $paged
-		// 	);
-
-		// 	if(isset($_GET['product_cat'])){
-		// 		$cat = $_GET['product_cat'];
-		// 		$args = array(
-		// 			'post_type' => 'affproducts',
-		// 			'tax_query' => array(
-		// 	            array(
-		// 	                'taxonomy' => $this->shop_taxonomy,
-		// 	                'field' => 'slug',
-		// 	                'terms' => $cat,
-		// 	            )
-		// 	        ),
-		// 			'posts_per_page' => 10,
-		// 			'paged' => $paged
-		// 		);
-		// 	}
-
-		// 	return new WP_Query( $args );
-
-		// }
-
-		// function filter_by_cats($query){
-
-		// 	if(isset($_GET['product_cat'])){
-		//  		$cat = $_GET['product_cat'];
-		//  		$query->set('tax_query', array(
-		// 	            array(
-		// 	                'taxonomy' => $this->shop_taxonomy,
-		// 	                'field' => 'slug',
-		// 	                'terms' => $cat,
-		// 	            )
-		// 	        ));
-		//  	}
-
-		// }
-
 		function shop_pagination() {
 		    global $wp_query;
 
@@ -262,10 +169,18 @@
 
 		}
 
+		function aff_shop_cats(){
+
+			require('walker_affcats.php');
+			$list = wp_list_categories( array( 'echo' => 0, 'taxonomy' => $this->shop_taxonomy, 'title_li' => '', 'hide_empty' => 0, 'walker' => new WalkerAffCats() ) );
+   			return '<ul class="aff_shop_cats">' . $list . '</ul>';
+
+		}
+
 		function __construct(){
-			
+
 			$options = get_option('soaffiliates');
-	
+			
 			if($options != ''){
 				
 				if($options['shop_categories'] != '')
