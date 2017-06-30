@@ -384,21 +384,162 @@
 
 		}
 
+		function restrict_articles_by_merchant($post_type){
+
+			global $typenow;
+		    if( $typenow == 'affproducts' ){
+
+		    	global $wpdb;
+			    $merchants = $wpdb->get_results("
+			        SELECT $wpdb->posts.id, $wpdb->posts.post_title
+				    FROM $wpdb->posts
+				    WHERE $wpdb->posts.post_status = 'publish' 
+				    AND $wpdb->posts.post_type = 'merchants'
+				    ORDER BY $wpdb->posts.post_date DESC
+			    ");
+
+		    	echo '<select name="merchant">';
+		    	echo '<option value="">All Merchants</option>';
+		    	foreach ($merchants as $merchant) {
+		    		$selected = '';
+		    		if(isset($_GET['merchant'])){
+		    			if(trim($merchant->id) == trim($_GET['merchant'])){
+		    				$selected = 'selected';
+		    			}
+		    		}
+		    		echo '<option value="' . $merchant->id . ' "' .  $selected . '>' . $merchant->post_title . '</option>';
+		    	}
+		    	echo '</select>';
+
+		    }
+
+		}
+
+		function modify_filter_merchants( $query ){
+
+		    global $typenow;
+		    global $pagenow;
+
+		    if( $pagenow == 'edit.php' && $typenow == 'affproducts' && isset($_GET['merchant']) ){
+
+		        $query->set( 'meta_query', array(
+			        	array(
+				            'key'     => 'merchantids',
+				            'value' => $_GET['merchant'],
+	            			'compare' => 'LIKE'
+				        )
+				    )
+			    );
+
+		    }
+
+		}
+
+		function products_shortcode( $atts, $content = null ){
+
+			global $post;
+
+			extract( 
+				shortcode_atts( 
+					array(
+						'product_ids' => '',
+						'layout' => 'list' // list or line
+					),
+					$atts
+				)
+			);
+
+			$product_ids = explode(',', $product_ids); 
+
+			require_once('so-productdata.php');
+
+			if($product_ids != ''){
+				if(is_array($product_ids)){
+
+					$products = get_posts(
+						array(
+							'post_type' => 'affproducts',
+							'post__in' => $product_ids
+						)
+					);
+
+					foreach ($products as $product) {
+						$pData = new ProductData($product->ID);
+						$product->cheapest = $pData->getMerchants()[0];
+					}
+
+				}
+
+				$path = '';
+
+				if($layout == 'line'){
+					$path = 'inc/sc_products_row.php';
+				}else{
+					$path = 'inc/sc_products_list.php';
+				}
+
+				ob_start();
+				require($path);
+				$content = ob_get_clean();
+				return $content;
+			}
+
+		}
+
+		function product_shortcode( $atts, $content = null ){
+
+			global $post;
+
+			require_once('so-productdata.php');
+
+			extract( 
+				shortcode_atts( 
+					array(
+						'product_id' => ''
+					),
+					$atts
+				)
+			);
+
+			if($product_id != ''){
+
+				$product = get_post($product_id);
+
+				$pData = new ProductData($product_id);
+				$merchants = $pData->getMerchants();
+
+				ob_start();
+				require('inc/sc_product.php');
+				$content = ob_get_clean();
+				return $content;
+
+			}
+
+		}
+
 		function __construct(){
 
 			/* Create Shop */
 
-			add_action( 'init', array($this, 'add_shop_taxonomies'));
-			add_action( 'init', array($this, 'aff_product_post_type'));
+			add_action( 'init', array($this, 'add_shop_taxonomies') );
+			add_action( 'init', array($this, 'aff_product_post_type') );
 
 			// Add Custom Fields
-			add_action( 'admin_init', array($this, 'custom_fields_for_products'));
+			add_action( 'admin_init', array($this, 'custom_fields_for_products') );
 			// Save Custom Fields
-			add_action( 'save_post', array($this, 'save_product_meta'));
+			add_action( 'save_post', array($this, 'save_product_meta') );
 
 			// Templates
-			add_filter( 'single_template', array($this, 'use_affproduct_template'));
-			add_filter( 'archive_template', array($this, 'use_affshop_template'));
+			add_filter( 'single_template', array($this, 'use_affproduct_template') );
+			add_filter( 'archive_template', array($this, 'use_affshop_template') );
+
+			// Post Backend Filters
+			add_action( 'restrict_manage_posts', array($this, 'restrict_articles_by_merchant') );
+			add_filter( 'parse_query', array($this, 'modify_filter_merchants') );
+
+			// Short code
+			add_shortcode( 'affproducts', array($this, 'products_shortcode') ); 
+			add_shortcode( 'affproduct', array($this, 'product_shortcode') ); 
 
 			// Add Shop Menu Item
 			// add_filter('nav_menu_items_affproducts', array($this, 'add_shop_admin_menu_item'));

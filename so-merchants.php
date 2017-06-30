@@ -6,7 +6,9 @@
 
 			$labels = array(
 				'name' => __( 'Merchants' ),
-				'singular_name' => __( 'Merchant' )
+				'singular_name' => __( 'Merchant' ),
+				'edit_item' => __( 'Edit Merchant' ),
+				'featured_image' => __( 'Merchant Logo' )
 			);
 
 			$supports = array('title', 'thumbnail');
@@ -61,6 +63,30 @@
 
 		}
 
+		function restrict_articles_by_issue() {
+		    global $wpdb;
+		    $merchants = $wpdb->get_col("
+		        SELECT DISTINCT meta_value
+		        FROM ". $wpdb->postmeta ."
+		        WHERE meta_key = 'merchants'
+		        ORDER BY meta_value
+		    ");
+		    ?>
+		    <label for="issue">Merchants:</label>
+		    <select name="issue_restrict_articles" id="issue">
+		        <option value="">Show all</option>
+		        <?php foreach ($issues as $issue) { ?>
+		        <option value="<?php echo esc_attr( $issue ); ?>" <?php if(isset($_GET['issue_restrict_articles']) && !empty($_GET['issue_restrict_articles']) ) selected($_GET['issue_restrict_articles'], $issue); ?>>
+		        <?php
+		          $issue   = get_post($issue);
+		          echo $issue->post_title;
+		        ?>
+		        </option>
+		        <?php } ?>
+		    </select>
+		    <?php
+		}
+
 		function __construct(){
 
 			/* Create Shop */
@@ -72,7 +98,7 @@
 			add_action( 'admin_init', array($this, 'custom_fields_for_merchant'));
 			// Save Custom Fields
 			add_action( 'save_post', array($this, 'save_merchant_meta'));
-			// add_filter( 'single_template', array($this, 'use_affproduct_template'));
+			// add_filter( 'single_template', array($this, 'use_affproduct_template')); 
 
 		}
 

@@ -67,6 +67,12 @@ class ProductData {
 
 	}
 
+	// function getCheapestMerchant(){
+
+	// 	// $this->merchants;
+
+	// }
+
 	function loadReviews($customData){
 
 		global $post;
@@ -116,7 +122,7 @@ class ProductData {
 	            array(
 	                'taxonomy' => $taxonomy,
 	                'field' => 'slug',
-	                'terms' => $termArray,
+	                'terms' => $termArray
 	            )
 	        ),
 			'posts_per_page' => 6
@@ -147,7 +153,6 @@ class ProductData {
 		<?php
 
 	}
-
 
 	function __construct($productId){
 

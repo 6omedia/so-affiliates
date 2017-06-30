@@ -19,6 +19,11 @@
 		$userId = get_current_user_id();
 	}
 
+
+	// echo '<pre>';
+	// print_r(get_post_meta($post->ID));
+	// echo '</pre>';
+
 ?>
 
 	<section class="aff_product_page">
