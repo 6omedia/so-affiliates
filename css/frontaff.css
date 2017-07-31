@@ -268,6 +268,7 @@
 .merchants_box {
     margin-bottom: 10px;
     overflow: hidden;
+    text-align: center;
    /* border: solid 1px #e6e6e6;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.16);*/
 }
@@ -299,8 +300,9 @@
         object-position: 50%;
     }
 
-    .merchants_box > img {
-        width: 250px;
+    .merchants_box .affboxcont > img {
+        /*width: 250px;*/
+        width: 50%;
         margin-right: 2%;
         float: left;
         margin-bottom: 10px;
@@ -310,10 +312,17 @@
     }
 
     .merchants_box table {
-        max-width: 58%;
+        /*max-width: 58%;*/
+        width: 48%;
         float: left;
         margin-top: 0px;
-        width: auto;
+        /*width: auto;*/
+    }
+
+    .merchants_box .affboxcont {
+        overflow: hidden;
+        max-width: 510px;
+        margin: 0px auto;
     }
 
 }

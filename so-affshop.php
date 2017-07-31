@@ -486,6 +486,70 @@
 
 		}
 
+		function sim_products_shortcode( $atts, $content = null ){
+
+			global $post;
+
+			extract( 
+				shortcode_atts( 
+					array(
+						'product_id' => '',
+						'taxonomy' => 'aff_product_categories',
+						'layout' => 'list' // list or line
+					),
+					$atts
+				)
+			);
+
+			$terms = get_the_terms($product_id, $taxonomy);
+			$termArray = [];
+
+			if(!empty($terms)){
+				foreach($terms as $term){
+					$termArray[] = $term->slug;
+				}
+			}
+
+			$args = array(
+				'post_type' => 'affproducts',
+				'post__not_in' => array($product_id),
+				'tax_query' => array(
+		            array(
+		                'taxonomy' => $taxonomy,
+		                'field' => 'slug',
+		                'terms' => $termArray
+		            )
+		        ),
+				'posts_per_page' => 6
+			);
+
+			$products = get_posts($args);
+
+			require_once('so-productdata.php');
+
+			if($product_id != ''){
+	
+				foreach ($products as $product) {
+					$pData = new ProductData($product->ID);
+					$product->cheapest = $pData->getMerchants()[0];
+				}
+
+				$path = '';
+
+				if($layout == 'line'){
+					$path = 'inc/sc_products_row.php';
+				}else{
+					$path = 'inc/sc_products_list.php';
+				}
+
+				ob_start();
+				require($path);
+				$content = ob_get_clean();
+				return $content;
+			}
+
+		}
+
 		function product_shortcode( $atts, $content = null ){
 
 			global $post;
@@ -539,6 +603,7 @@
 
 			// Short code
 			add_shortcode( 'affproducts', array($this, 'products_shortcode') ); 
+			add_shortcode( 'simproducts', array($this, 'sim_products_shortcode') ); 
 			add_shortcode( 'affproduct', array($this, 'product_shortcode') ); 
 
 			// Add Shop Menu Item

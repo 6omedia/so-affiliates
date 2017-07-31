@@ -135,6 +135,7 @@
 		}
 
 		function shop_pagination() {
+
 		    global $wp_query;
 
 		    $big = 999999999;
@@ -153,11 +154,15 @@
 		    if (is_array($pages)) {
 		        $current_page = ( get_query_var('paged') == 0 ) ? 1 : get_query_var('paged');
 		        echo '<ul class="pagination">';
+
+		        // print_r($pages);
+
 		        foreach ($pages as $i => $page) {
+		        //	echo '<li>' . $current_page . ' ' . $page . '</li>';
 		            if ($current_page == 1 && $i == 0) {
 		                echo "<li class='active'>$page</li>";
 		            } else {
-		                if ($current_page != 1 && $current_page == $i) {
+		                if ($current_page != 1 && $current_page == intval($page)) {
 		                    echo "<li class='active'>$page</li>";
 		                } else {
 		                    echo "<li>$page</li>";
