@@ -6,8 +6,10 @@
 
 			<div class="col-sm-4">
 				<div class="product">
-					<?php echo get_the_post_thumbnail($product->ID, 'small'); ?>
-					<p><?php echo $product->post_title; ?></p>
+					<a href="<?php echo get_permalink($product->ID); ?>">
+						<?php echo get_the_post_thumbnail($product->ID, 'small'); ?>
+						<p><?php echo $product->post_title; ?></p>
+					</a>
 					<p class="price">£<?php echo number_format($product->cheapest['price'], 2); ?></p>
 					<a class="add_buy" href="<?php echo $product->cheapest['link']; ?>">View</a>
 				</div>

@@ -1,7 +1,12 @@
 <div class="affproducts_box merchants_box">
 	<div class="affboxcont">
-		<h3><?php echo $product->post_title; ?></h3>
-		<?php echo get_the_post_thumbnail($product->ID, 'medium'); ?>
+		<a href="<?php echo get_permalink($product->ID); ?>">
+			<h3><?php echo $product->post_title; ?></h3>
+		</a>
+		
+		<a href="<?php echo get_permalink($product->ID); ?>">
+			<?php echo get_the_post_thumbnail($product->ID, 'medium'); ?>
+		</a>
 
 		<table class="table_merchants">
 			<?php foreach ($merchants as $merchant) { ?>

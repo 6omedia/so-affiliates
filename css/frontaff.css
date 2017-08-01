@@ -300,7 +300,7 @@
         object-position: 50%;
     }
 
-    .merchants_box .affboxcont > img {
+    .merchants_box .affboxcont > a img {
         /*width: 250px;*/
         width: 50%;
         margin-right: 2%;
