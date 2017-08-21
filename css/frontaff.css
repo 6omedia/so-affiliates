@@ -267,7 +267,7 @@
 
 .merchants_box {
     margin-bottom: 10px;
-    overflow: hidden;
+    /*overflow: hidden;*/
     text-align: center;
    /* border: solid 1px #e6e6e6;
     box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.16);*/
@@ -284,6 +284,90 @@
 
 .merchants_box .add_buy {
     float: right;
+}
+
+.disclosure {
+    position: relative;
+    display: inline-block;
+    background: url(../img/info.png) no-repeat 100% 50%;
+    background-size: 16px;
+    color: #adadad;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.disclosure span {
+    visibility: hidden;
+    width: 250px;
+    background-color: #fff;
+    color: #adadad;
+    border: solid 2px;
+    border-radius: 0px;
+    position: absolute;
+    z-index: 1;
+    top: 30px;
+    right: 0px;
+    margin-left: -60px;
+    opacity: 0;
+    transition: opacity 1s;
+    font-size: 12px;
+    padding: 10px;
+    text-align: left !important;
+}
+
+/* Tooltip arrow */
+.disclosure span::after {
+    content: "";
+    position: absolute;
+    top: -10px;
+    right: 40px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent transparent #fff transparent;
+}
+
+.tri {
+    content: "";
+    position: absolute;
+    top: -16px;
+    right: 37px;
+    border-width: 8px;
+    border-style: solid;
+    border-color: transparent transparent #adadad transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+/*.disclosure:hover span {
+    visibility: visible;
+    opacity: 1;
+}*/
+
+.disclosureOpen {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.where_to_buy_box .disclosure,
+.affproducts_box .disclosure {
+    width: 100%;
+    text-align: right;
+}
+
+.disclosureCenter .disclosure {
+    text-align: center;
+    width: auto;
+}
+
+.disclosureCenter .disclosure span {
+    right: -75%;
+}
+
+.disclosureCenter .disclosure span:after {
+    right: 45%;
+}
+
+.disclosureCenter .disclosure .tri {
+    right: 108px;    
 }
 
 @media (min-width: 500px) {
@@ -320,7 +404,7 @@
     }
 
     .merchants_box .affboxcont {
-        overflow: hidden;
+        /*overflow: hidden;*/
         max-width: 510px;
         margin: 0px auto;
     }

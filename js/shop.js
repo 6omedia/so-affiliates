@@ -22,4 +22,19 @@ jQuery(document).ready(function($){
 
 	});
 
+	// disclosure toggle
+
+	var disclosureToggle = $('.disclosure');
+	var disclosureTooltip = $('.disclosure > .tooltiptext');
+
+	$('body').on('click', function(ev){
+		if(ev.target.className !== 'disclosure'){
+			disclosureTooltip.removeClass('disclosureOpen');
+		}
+	});
+
+	disclosureToggle.on('click', function(){
+		$(this).find('.tooltiptext').addClass('disclosureOpen');
+	});
+
 });

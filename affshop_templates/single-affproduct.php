@@ -1,5 +1,4 @@
-<?php get_header(); ?> 
-
+<?php get_header(); ?>
 
 <?php 
 
@@ -18,11 +17,6 @@
 	if(is_user_logged_in()){
 		$userId = get_current_user_id();
 	}
-
-
-	// echo '<pre>';
-	// print_r(get_post_meta($post->ID));
-	// echo '</pre>';
 
 ?>
 
@@ -60,14 +54,14 @@
 					<div class="col-sm-5">
 						<div class="where_to_buy_box pinkbox">
 
-						<?php
+							<?php
 
-							$wsClasses = 'ws_heart';
-							if(function_exists('wishListClasses')){
-								$wsClasses = wishListClasses($post->ID);
-							}
+								$wsClasses = 'ws_heart';
+								if(function_exists('wishListClasses')){
+									$wsClasses = wishListClasses($post->ID);
+								}
 
-						?>
+							?>
 
 							<h2>Where to Buy <span data-post_id="<?php echo $post->ID; ?>" data-user_id="<?php echo $userId; ?>" class="<?php echo $wsClasses; ?>"></span></h2>
 							<!-- merchant links -->
@@ -86,6 +80,7 @@
 								</tr>
 							<?php } ?>
 							</table>
+							<?php include(plugin_dir_path(__FILE__) . '../inc/disclosure.php'); ?>
 						</div>
 						<!-- reviews -->
 						<div class="product_review pinkbox">

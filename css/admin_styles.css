@@ -29,3 +29,14 @@ input[readonly] {
 	float: left;
 	margin-right: 10px;
 }
+
+/* Settings Page */
+
+.soa_settings {
+	width: 40%;
+	float: left;
+}
+
+.soa_settings textarea {
+    width: 300px;
+}

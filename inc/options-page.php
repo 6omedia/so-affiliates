@@ -3,6 +3,7 @@
 	$shop_name = '';
 	$affTaxes = [];
 	$shop_category = 'categories';
+	$disclosure = '';
 
 	if($helpFuncs->hasFormSubmitted('so_options_form_submitted')){
 
@@ -10,6 +11,7 @@
 		$options['aff_product_taxonomies'] = $_POST['aff_product_taxonomies'];
 		$options['shop_categories'] = $_POST['shop_categories'];
 		$options['last_updated'] = time();
+		$options['disclosure'] = $_POST['disclosure'];
 
 		update_option('soaffiliates', $options);
 
@@ -28,6 +30,9 @@
 		if($options['shop_categories'] != '')
 			$shop_category = $options['shop_categories'];
 
+		if($options['disclosure'] != '')
+			$disclosure = $options['disclosure'];
+
 	}
 
 ?>
@@ -36,7 +41,7 @@
 	<h1>Manage <?php echo $shop_name; ?> Shop</h1>
 	<div id="dashboard-widgets-wrap">
 	    <div id="dashboard-widgets" class="metabox-holder">
-	    	<div id="postbox-container-1" class="postbox-container">
+	    	<div class="soa_settings">
 	        	<div id="normal-sortables" class="ui-sortable meta-box-sortables">
 	                <!-- BOXES -->
 	                <div class="postbox">
@@ -108,6 +113,15 @@
 
 		                							 } ?>
 		                						</select>
+		                					</td>
+		                				</tr>
+		                				<tr>
+		                					<td>
+		                						<label for="disclosure">Disclosure</label>
+		                						<p>(this is displayed as a tooltip where affiliate links are displayed, the text should explain that you may be compensated for any purchases made)</p>
+		                					</td>
+		                					<td>
+		                						<textarea name="disclosure" id="disclosure" type="text"><?php echo $disclosure; ?></textarea>
 		                					</td>
 		                				</tr>
 		                			</table>

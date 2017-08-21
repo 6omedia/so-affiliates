@@ -18,6 +18,7 @@
 		<?php } ?>
 
 	</div>
+	<?php include(plugin_dir_path(__FILE__) . '../inc/disclosure.php'); ?>
 </div>
 
 
