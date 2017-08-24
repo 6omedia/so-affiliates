@@ -2,10 +2,10 @@
 /* aff page */
 
 .affproduct img {
-	max-width: 500px;
-	margin: 0px auto;
-	display: block;
-	margin-bottom: 20px;
+    max-width: 500px;
+    margin: 0px auto;
+    display: block;
+    margin-bottom: 20px;
 }
 
 .instagram_box {
@@ -17,13 +17,13 @@
 }
 
 .instagram_box a:first-child {
-	margin-left: 2%;
+    margin-left: 2%;
 }
 
 .instagram_box a {
-	width: 22.5%;
-	float: left;
-	margin: 2% 2% 2% 0px;
+    width: 22.5%;
+    float: left;
+    margin: 2% 2% 2% 0px;
 }
 
 .instagram_box img {
@@ -37,8 +37,8 @@
 }
 
 .where_to_buy_table {
-	width: 100%;
-	text-align: center;
+    width: 100%;
+    text-align: center;
 }
 
 .where_to_buy_table img {
@@ -48,7 +48,7 @@
 /* Review */
 
 .product_review {
-	overflow: hidden;
+    overflow: hidden;
 }
 
 .product_review .rating {
@@ -70,7 +70,7 @@
 .rating-10 { background: #ffcf43 }
 
 .product_review .rating li {
-	background: url(../img/star.png) no-repeat 50%;
+    background: url(../img/star.png) no-repeat 50%;
     width: 20px;
     height: 20px;
     background-size: contain;
@@ -80,13 +80,13 @@
 }
 
 .product_review .rating li:last-child {
-	margin-right: 0px;
+    margin-right: 0px;
 }
 
 .product_review .procon {
-	width: 50%;
-	float: left;
-	margin: 0px;
+    width: 50%;
+    float: left;
+    margin: 0px;
     padding-left: 0px;
     list-style: none;
 }
@@ -99,16 +99,16 @@
 }
 
 .product_review .pros {
-	clear: both;
+    clear: both;
 }
 
 .product_review .pros li {
-	background: url(../img/tick.png) no-repeat 0% 3px;
+    background: url(../img/tick.png) no-repeat 0% 3px;
     background-size: 15px;
 }
 
 .product_review .cons li {
-	background: url(../img/cross.png) no-repeat 0% 3px;
+    background: url(../img/cross.png) no-repeat 0% 3px;
     background-size: 15px;
 }
 
@@ -347,16 +347,23 @@
     opacity: 1 !important;
 }
 
+.where_to_buy_box .disclosure {
+    margin-bottom: 0px;
+}
+
 .where_to_buy_box .disclosure,
 .affproducts_box .disclosure {
     width: 100%;
     text-align: right;
+    display: block;
+    clear: both;
 }
 
-.disclosureCenter .disclosure {
+/*.disclosureCenter .disclosure {
     text-align: center;
     width: auto;
 }
+*/
 
 .disclosureCenter .disclosure span {
     right: -75%;
@@ -404,7 +411,6 @@
     }
 
     .merchants_box .affboxcont {
-        /*overflow: hidden;*/
         max-width: 510px;
         margin: 0px auto;
     }
