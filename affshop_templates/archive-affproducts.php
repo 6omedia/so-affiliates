@@ -19,7 +19,11 @@
 		$useBrand = true;
 	}
 
+	$located = locate_template( 'archive-affproducts.php' );
+
 ?>
+
+<?php if(!$located){ ?>
 
 <section class="aff_shop_page">
 	<div class="container">
@@ -36,6 +40,7 @@
 
 						echo $shopFront->aff_shop_cats();
 						// $shopFront->outputShopCats();  aff_shop_cats
+						
 
 					?>
 				</div>
@@ -112,8 +117,12 @@
 
 <script>
 	
-
-
 </script>
+
+<?php }else{ 
+
+	load_template($located);
+
+} ?>
 
 <?php get_footer(); ?>

@@ -51,7 +51,8 @@
     overflow: hidden;
 }
 
-.product_review .rating {
+.product_review .rating,
+.soaff_video_products .rating {
     padding-left: 0px;
     display: inline-block;
     height: 20px;
@@ -69,7 +70,8 @@
 .rating-9 { background: linear-gradient(to right, #ffcf43 0%, #ffcf43 90%, #dcdcdc 90%, #dcdcdc 100%); }
 .rating-10 { background: #ffcf43 }
 
-.product_review .rating li {
+.product_review .rating li,
+.soaff_video_products .rating li {
     background: url(../img/star.png) no-repeat 50%;
     width: 20px;
     height: 20px;
@@ -79,7 +81,8 @@
     margin-right: -6px;
 }
 
-.product_review .rating li:last-child {
+.product_review .rating li:last-child,
+.soaff_video_products .rating li:last-child {
     margin-right: 0px;
 }
 
@@ -377,8 +380,169 @@
     right: 108px;    
 }
 
+/************* VIDEOS ************/
+
+.soaff_video {
+
+}
+
+.soaff_video_products {
+    overflow: hidden;
+    position: relative;
+}
+
+.soaff_video_products .ul_products {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.soaff_video_products .ul_products > li {
+    float: left;
+    padding: 0px 35px;
+    display: none;
+}
+
+.soaff_video_products .ul_products > li:first-child {
+    display: inline-block;
+}
+
+.soaff_video_products .ul_products > li img {
+    float: left;
+    width: 25%;
+    height: 140px;
+    object-fit: contain;
+    object-position: center;
+}
+
+.soaff_video_products .ul_products > li .details {
+    width: 75%;
+    float: left;
+    padding-left: 10px;
+}
+
+.soaff_video_products .rating {
+    margin: 0px 0px 10px 0px;
+}
+
+.soaff_arrows {
+    font-size: 32px;
+    color: #8d8d8d;
+    width: 38px;
+    height: 38px;
+    line-height: 1em;
+    display: absolute;
+    cursor: pointer;
+}
+
+.soaff_arrows:hover {
+    color: #000;
+}
+
+.soaff_arrows.left {
+    position: absolute;
+    left: 0px;
+    top: 50%;
+}
+
+.soaff_arrows.right {
+    position: absolute;
+    right: 0px;
+    top: 50%;
+    text-align: right;
+}
+
+.soaff_video_products .merchant {
+    font-size: 12px;
+    color: #777;
+}
+
+.soaff_video_products .merchant span {
+    font-size: 14px;
+    color: #515151;
+    text-decoration: underline;
+}
+
+.soaff_video_products .time {
+    font-weight: bold;
+    color: #444;
+    cursor: pointer;
+}
+
+.soaff_videoslider {
+    position: relative;
+}
+
+.soaffvideo_width {
+    width: 640px;
+}
+
+.soaff_video .listHeader {
+    background: #f0f0f0;
+    padding: 5px 10px;
+    font-size: 14px;
+    position: relative;
+    right: 0px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.soaff_video .listHeader:after {
+    content: "▼";
+    width: 7px;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-left: 0px;
+    position: absolute;
+    right: 15px;
+    top: 8px;
+    color: #454545;
+    cursor: pointer;
+}
+
+.soaff_video .listHeader.opened:after {
+    content: "▲";
+    width: 7px;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-left: 3px;
+}
+
+.soaff_video .allProducts {
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    font-size: 12px;
+    display: none;
+}
+
+.soaff_video .listHeader.opened + .allProducts {
+    display: table;
+}
+
+.soaff_video .allProducts tr:hover {
+    background: #f2f2f2;
+    cursor: pointer;
+}
+
+.soaff_video .allProducts td {
+    border: none;
+}
+
+.soaff_video .allProducts td:first-child:hover {
+    color: #bcbcbc;
+}
+
+.soaff_video .allProducts td a {
+    border: none;
+}
+
+.soaff_video .allProducts td a:hover {
+    color: #bcbcbc;
+}
+
 @media (min-width: 500px) {
-    
+
     .affproducts_box.line .product {
         float: left;
         width: 48%;

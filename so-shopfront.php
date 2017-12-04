@@ -1,9 +1,12 @@
 <?php
 
+	require('walker_affcats.php');
+
 	class ShopFront {
 
 		private $shopname = '';
 		private $shop_taxonomy = 'category';
+		private $product_taxonomies = '';
 
 		private function getShopCategories(){
 
@@ -38,6 +41,10 @@
 		}
 
 		function outPutBreadCrumbs($page, $product = ''){
+
+			if($page == 'brands'){
+				return;
+			}
 
 			$linkArray = array();
 
@@ -174,10 +181,18 @@
 
 		}
 
-		function aff_shop_cats(){
+		function aff_shop_cats($theTax = ''){
 
-			require('walker_affcats.php');
-			$list = wp_list_categories( array( 'echo' => 0, 'taxonomy' => $this->shop_taxonomy, 'title_li' => '', 'hide_empty' => 0, 'walker' => new WalkerAffCats() ) );
+			$taxonomy = '';
+
+			if($theTax == ''){
+				$taxonomy = $this->shop_taxonomy;
+			}
+
+			if(in_array($theTax, $this->product_taxonomies))
+				$taxonomy = $theTax;
+
+			$list = wp_list_categories( array( 'echo' => 0, 'taxonomy' => $taxonomy, 'title_li' => '', 'hide_empty' => 0, 'walker' => new WalkerAffCats() ) );
    			return '<ul class="aff_shop_cats">' . $list . '</ul>';
 
 		}
@@ -190,6 +205,9 @@
 				
 				if($options['shop_categories'] != '')
 					$this->shop_taxonomy = $options['shop_categories'];
+
+				if($options['aff_product_taxonomies'] != '')
+					$this->product_taxonomies = $options['aff_product_taxonomies'];
 
 			}
 

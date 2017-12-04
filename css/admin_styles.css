@@ -1,4 +1,9 @@
 
+.invalid {
+    background: #ffe3e3 !important;
+    border: solid 2px #c20000 !important;
+}
+
 /* Product Page */
 
 .removeBtn {
@@ -39,4 +44,222 @@ input[readonly] {
 
 .soa_settings textarea {
     width: 300px;
+}
+
+/* Videos */
+
+.soaff .side {
+	background: #814242;
+    width: 245px;
+    float: left;
+    height: 848px;
+    overflow: auto;
+}
+
+.soaff .side li {
+    padding: 10px;
+    margin: 0px;
+    font-size: 16px;
+    border-bottom: solid 1px #fff;
+    line-height: 1.25em;
+    cursor: pointer;
+    color: aliceblue;
+}
+
+.soaff .side li:hover {
+	/*background: #cb3d3d;*/
+    /*background: #ffeed7;*/
+    background: #e7dbdb;
+    color: #9d5b00;
+}
+
+.soaff_mainvidsection {
+    /*background: #ffeed7;*/
+    background: #e7dbdb;
+    float: left;
+    margin-top: 13px;
+    padding: 0px 20px;
+    min-width: 600px;
+    max-width: 900px;
+    min-height: 650px;
+    position: relative;
+}
+
+.soaff_novideo:before {
+    content: '';
+    background: #e7dbdb;
+    width: 100%;
+    position: absolute;
+    height: 100%;
+    left: 0px;
+    z-index: 1;
+}
+
+.addvid_bar {
+    border-bottom: solid 1px #d3d3d3;
+    padding-bottom: 10px;
+}
+
+.addvid_bar li {
+	display: inline-block;
+	margin-right: 5px;
+	margin-bottom: 0px;
+}
+
+.addvid_bar label {
+	display: block;
+}
+
+.soaff .label_pad {
+	margin-bottom: 5px;
+}
+
+.addvid_bar .button {
+ 	vertical-align: bottom;
+}
+
+.soaff .loading {
+    position: relative;
+}
+
+.soaff .loading:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    background: #ffffffb0 url(../img/spin.gif) no-repeat 50%;
+    background-size: 25px;
+}
+
+.soaff .active {
+    background: #e7dbdb;
+    color: #9d5b00 !important;
+}
+
+.soaff .edit_box label {
+    background: #be8484;
+    display: inline-block;
+    font-size: 24px;
+    padding: 10px 15px;
+    vertical-align: baseline;
+    margin-right: -3px;
+    border-bottom: solid 1px #000;
+    color: #ffe8e8;
+}
+
+.soaff .edit_box input {
+    margin: 20px 0px;
+    background: #e1cbcb;
+    border: none;
+    border-bottom: solid 1px;
+    font-size: 24px;
+}
+
+.soaff .edit_box input:focus {
+    outline: none;
+    border-bottom: solid 1px #c76363;
+    background: #f6f1f1;
+}
+
+.savid_x {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    right: 15px;
+    top: 15px;
+    background: white url(../img/cross.png) no-repeat 50%;
+    border-radius: 100%;
+    background-size: 14px;
+    border: solid 1px #814242;
+    cursor: pointer;
+}
+
+#saveVideo {
+    float: right;
+    margin: 25px 0px;
+}
+
+.soaff .products {
+    height: 240px;
+    overflow: auto;
+}
+
+.soaff table {
+    text-align: left;
+    margin-bottom: 0px;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 615px;
+}
+
+.soaff table input {
+    width: 135px;
+}
+
+.soaff table input[type="number"] {
+    width: 50px;
+}
+
+.soaff table label {
+    cursor: pointer;
+    display: inline-block;
+    width: 100%;
+}
+
+.soaff table tr {
+    background: #eee;
+}
+
+.soaff table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.soaff table th {
+    border-bottom: solid 1px #000;
+    background: #e7dbdb;
+}
+
+.soaff table td {
+    padding: 10px;
+}
+
+#productTable .x {
+    text-align: center;
+    background: #c02e2e;
+    border-radius: 100%;
+    width: 20px;
+    height: 20px;
+    color: #fff;
+    font-weight: bold;
+    float: right;
+    cursor: pointer;  
+}
+
+.theVideoBox {
+    overflow: hidden;
+}
+
+#q_product {
+    width: 180px;
+}
+
+.c_modal {position: fixed;width: 100%;height: 100%;background: rgba(0,0,0,0.8);top: 0px;}
+
+.c_modal .box {
+    background: #fff;
+    padding: 25px;
+    width: 365px;
+    text-align: center;
+    margin: 85px auto;
+}
+
+.c_modal button {
+    margin: 0px 5px;
+    background: #327172;
+    color: #fff;
+    border: none;
+    padding: 5px 15px;
+    border-radius: 2px;
+    cursor: pointer;
 }
