@@ -139,6 +139,26 @@
 	                <!-- BOXES -->
 	                <div class="postbox">
 	                	<div class="inside">
+	                		<h2>Short Codes</h2>
+	                		<table>
+	                			<tr>
+	                				<th>Product Attributes:</th>
+	                				<td>[aff_attributes postid="<em>product id</em>"]</td>
+	                			</tr>
+	                			<tr>
+	                				<th>Product Criterion:</th>
+	                				<td>[aff_criterion postid="<em>product id</em>"]</td>
+	                			</tr>
+	                		</table>
+	                	</div>
+	                </div>
+	            </div>
+	        </div>
+	        <div class="postbox-container">
+	        	<div id="normal-sortables" class="ui-sortable meta-box-sortables">
+	                <!-- BOXES -->
+	                <div class="postbox">
+	                	<div class="inside">
 	                		<h2>Views/Clicks</h2>
 	                	</div>
 	                </div>

@@ -114,6 +114,51 @@
     background: url(../img/cross.png) no-repeat 0% 3px;
     background-size: 15px;
 }
+    
+/* Criterion */
+
+.criterion_list {
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+
+.criterion_list div {
+    display: inline-block;
+}
+
+.criterion_list .bar {
+    width: 80%;
+    height: 20px;
+    background: #eaeaea;
+    max-width: 400px;
+    /*margin-right: 15px;*/
+    border-radius: 2px;
+}
+
+.criterion_list .bar div {
+    width: 80%;
+    background: #8cc9ba;
+    height: 20px;
+}
+
+.criterion_list p {
+    padding-bottom: 0px;
+}
+
+.criteria_num {
+    background: #686868;
+    vertical-align: top;
+    height: 20px;
+    color: aliceblue;
+    width: 50px;
+    text-align: center;
+    font-size: 13px;
+}
+
+.attributes_table {
+    width: auto;
+}
 
 /* Shop */
 

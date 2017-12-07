@@ -52,6 +52,19 @@ class SoAffilates {
 
 		dbDelta( $sql );
 
+		// $table_name = $wpdb->prefix . 'aff_attributes';
+
+		// $sql = "CREATE TABLE $table_name (
+		// 	id mediumint(9) NOT NULL AUTO_INCREMENT,
+		// 	taxonomy varchar(30) NOT NULL,
+		// 	term varchar(30) NOT NULL,
+		// 	attribute_name varchar(30) NOT NULL,
+		// 	attribute_value varchar(50) NOT NULL,
+		// 	UNIQUE KEY id (id)
+		// ) $charset_collate;";
+
+		// dbDelta( $sql );
+
 	}
 
 	function so_aff_menu(){
@@ -137,7 +150,7 @@ class SoAffilates {
 		wp_enqueue_script('shop_js', plugins_url( 'so-affiliates/js/shop.js' ), array('jquery'));
 
 		if(is_single()){
-			wp_enqueue_script('frontend_video_js', plugins_url( 'so-affiliates/js/frontend_video.js' ), array('jquery'));			
+			wp_enqueue_script('frontend_video_js', plugins_url( 'so-affiliates/js/frontend_video.js' ), array('jquery'));
 		}
 	
 	}
@@ -153,6 +166,9 @@ class SoAffilates {
 		require('so-videos.php');
 		$videos = new Videos();
 
+		require('so-attributes.php');
+		$videos = new SoAttributes();
+
 	}
 
 	function __construct() {
@@ -165,7 +181,7 @@ class SoAffilates {
 
 		// Add Styles and Scripts
 		add_action( 'admin_head', array( $this, 'soaff_load_admin_assets' ));
-		add_action( 'wp_enqueue_scripts', array($this, 'soaff_load_front_assets'));
+		add_action( 'wp_enqueue_scripts', array($this, 'soaff_load_front_assets' ));
 
 		// Add Aff Products Post Type
 		$this->setup_aff_shop();

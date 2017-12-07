@@ -67,7 +67,10 @@
 			add_meta_box("instagram_url", "Instagram URL", array($this, "instagram_url_box"), "affproducts", "normal", "low");
 			
 			// reviews
-			add_meta_box("review", "Review", array($this, "review_box"), "affproducts", "normal", "low");		
+			add_meta_box("review", "Review", array($this, "review_box"), "affproducts", "normal", "low");	
+
+			add_meta_box("attributes", "Attributes", array($this, "attributesBox"), "affproducts", "normal", "low");
+			add_meta_box("criterion", "Criterion", array($this, "criteriaBox"), "affproducts", "normal", "low");
 
 		}
 
@@ -308,6 +311,104 @@
 
 		}
 
+		function attributesBox(){
+
+			global $post;
+
+			$attributeList = '';
+
+			$theTaxonomy = get_option('soaffiliates')['shop_categories'];
+			$term = get_the_terms($post->ID, $theTaxonomy);
+
+			if(!empty($term)){
+				$t_id = $term[0]->term_id; // Get the ID of the term you're editing  
+			    $term_meta = get_option( "taxonomy_term_$t_id" ); // Do the check
+			    $attributeList = explode(',', $term_meta['attributes']);
+			}
+
+			$postCustom = get_post_custom($post->ID);
+			$savedAttr = unserialize($postCustom['attributes'][0]);
+
+			?>
+
+			<?php if($attributeList != ''){ ?>
+				<div class="soaff_attributes">
+					<?php foreach ($attributeList as $attr) { ?>
+						
+						<?php
+
+							$value = '';
+
+							if(isset($savedAttr[$attr]))
+								$value = $savedAttr[$attr];
+
+						?>
+
+						<div class="attr_field">
+							<label><?php echo ucwords($attr); ?>:</label>
+							<input name="soaff_attr[<?php echo $attr; ?>]" value="<?php echo $value; ?>">
+						</div>
+
+					<?php } ?>
+				</div>
+			<?php } ?>
+
+			<?php
+
+		}
+
+		function criteriaBox(){
+
+			global $post;
+
+			$critiranList = '';
+
+			$theTaxonomy = get_option('soaffiliates')['shop_categories'];
+			$term = get_the_terms($post->ID, $theTaxonomy);
+
+			if(!empty($term)){
+				$t_id = $term[0]->term_id; // Get the ID of the term you're editing  
+			    $term_meta = get_option( "taxonomy_term_$t_id" );
+			    $critiranList = explode(',', $term_meta['criterion']);
+			}
+
+			$postCustom = get_post_custom($post->ID);
+
+			$savedAttr = unserialize(get_post_custom($post->ID)['attributes'][0]);
+			$savedCrit = []; 
+
+			if(isset($postCustom['criterion'])){
+				$savedCrit = unserialize($postCustom['criterion'][0]);
+			}
+
+			?>
+
+			<?php if($critiranList != ''){ ?>
+				<div class="soaff_attributes">
+					<?php foreach ($critiranList as $crit) { ?>
+						
+						<?php
+
+							$value = '';
+
+							if(isset($savedCrit[$crit]))
+								$value = $savedCrit[$crit];
+
+						?>
+
+						<div class="attr_field">
+							<label><?php echo ucwords($crit); ?>:</label>
+							<input type="number" min="0" max="10" name="soaff_crit[<?php echo $crit; ?>]" value="<?php echo $value; ?>">
+						</div>
+
+					<?php } ?>
+				</div>
+			<?php } ?>
+
+			<?php
+			
+		}
+
 		function save_product_meta(){
 
 			global $post;
@@ -338,6 +439,23 @@
 			update_post_meta($post->ID, "rating", $_POST["rating"]);
 			update_post_meta($post->ID, "pro", $_POST["pro"]);
 			update_post_meta($post->ID, "con", $_POST["con"]);
+
+			// Attributes
+			update_post_meta($post->ID, "attributes", $_POST["soaff_attr"]);
+			update_post_meta($post->ID, "criterion", $_POST["soaff_crit"]);
+
+			// global $post;
+
+			// $attributeList = '';
+
+			// $theTaxonomy = get_option('soaffiliates')['shop_categories'];
+			// $term = get_the_terms($post->ID, $theTaxonomy);
+
+			// if(!empty($term)){
+			// 	$t_id = $term[0]->term_id; // Get the ID of the term you're editing  
+			//     $term_meta = get_option( "taxonomy_term_$t_id" ); // Do the check
+			//     $attributeList = explode(',', $term_meta['attributes']);
+			// }
 
 		}
 
@@ -605,6 +723,7 @@
 			add_shortcode( 'affproducts', array($this, 'products_shortcode') ); 
 			add_shortcode( 'simproducts', array($this, 'sim_products_shortcode') ); 
 			add_shortcode( 'affproduct', array($this, 'product_shortcode') ); 
+			// add_shortcode( 'affcompare', array($this, 'compare_shortcode') ); 
 
 			// Add Shop Menu Item
 			// add_filter('nav_menu_items_affproducts', array($this, 'add_shop_admin_menu_item'));

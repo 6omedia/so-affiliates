@@ -89,7 +89,7 @@
 
 										if($useBrand){
 
-											$terms = get_the_terms($productId, 'brands');
+											$terms = get_the_terms(get_the_ID(), 'brands');
 
 											if(!empty($terms)){
 												$brand = $terms[0]->name;

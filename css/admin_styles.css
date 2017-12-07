@@ -263,3 +263,10 @@ input[readonly] {
     border-radius: 2px;
     cursor: pointer;
 }
+
+.soaff_attributes label {
+    cursor: pointer;
+    width: 90px;
+    display: inline-block;
+    font-weight: bold;
+}

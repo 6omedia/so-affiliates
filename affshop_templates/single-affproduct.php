@@ -36,15 +36,20 @@
 							<?php the_post_thumbnail(); ?>
 
 							<!-- instagram -->
-							<div class="instagram_box">
-								<?php foreach ($instagramUrls as $img) { ?>
-									
-									<a target="_blank" href="<?php echo $img['pageUrl']; ?>">
-										<img src="<?php echo $img['imgSrc']; ?>">
-									</a>	
-									
-								<?php } ?>
-							</div>
+
+							<?php if($instagramUrls[0]['imgSrc']){ ?>
+
+								<div class="instagram_box">
+									<?php foreach ($instagramUrls as $img) { ?>
+										
+										<a target="_blank" href="<?php echo $img['pageUrl']; ?>">
+											<img src="<?php echo $img['imgSrc']; ?>">
+										</a>	
+										
+									<?php } ?>
+								</div>
+
+							<?php } ?>
 
 							<!-- description -->
 							<?php the_content(); ?>
@@ -117,6 +122,33 @@
 								?>
 							</ul>
 						</div>
+
+						<div class="criterion">
+							<?php
+
+								$criterion = $productData->getCriterion(); 
+			
+								if($criterion){
+
+									echo '<ul class="criterion_list">';
+
+									foreach($criterion as $key => $criteria){
+										echo '<li>';
+										echo '<p>' . ucwords($key) . '</p>';
+										echo '<div class="bar">';
+										echo '<div class="soaff_criteria_bar" style="width: ' . $criteria * 10 . '%"></div>';
+										echo '</div>';
+										echo '<div class="criteria_num">' . $criteria . ' / 10</div>';
+										echo '</li>';
+									}
+
+									echo '</ul>';
+
+								}
+
+							?>
+						</div>
+
 						<!-- similar -->
 						<div class="similar_products pinkbox">
 							<h2>Similar Products</h2>

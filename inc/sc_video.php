@@ -71,7 +71,6 @@
 			</ul>
 		</div>
 
-
 		<?php if($list){ ?>
 			<div class="soaffvideo_width">
 				<p class="listHeader <?php echo $list; ?>">All Products Featured</p>

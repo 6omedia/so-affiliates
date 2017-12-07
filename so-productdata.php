@@ -10,6 +10,8 @@ class ProductData {
 				'cons' => array()
 			);
 	private $brand = '';
+	private $attributes = '';
+	private $criterion = '';
 
 	function getMerchants(){
 		return $this->merchants;
@@ -25,6 +27,14 @@ class ProductData {
 
 	function getBrand(){
 		return $this->brand;
+	}
+
+	function getAttributes(){
+		return $this->attributes;
+	}
+
+	function getCriterion(){
+		return $this->criterion;
 	}
 
 	function loadInstagramPictures($customData){
@@ -104,6 +114,22 @@ class ProductData {
 
 	}
 
+	function loadAttributes($customData){
+
+		if(isset($customData['attributes'])){
+			$this->attributes = unserialize($customData['attributes'][0]);
+		}
+
+	}
+
+	function loadCriterion($customData){
+
+		if(isset($customData['criterion'])){
+			$this->criterion = unserialize($customData['criterion'][0]);
+		}
+
+	}
+
 	function outputSimilarProducts($productId, $taxonomy){
 
 		$terms = get_the_terms($productId, $taxonomy);
@@ -162,6 +188,8 @@ class ProductData {
 		$this->loadMerchants($customData);
 		$this->loadReviews($customData);
 		$this->loadBrand($productId);
+		$this->loadAttributes($customData);
+		$this->loadCriterion($customData);
 
 	}
 
